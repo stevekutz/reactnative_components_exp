@@ -4,25 +4,17 @@ import { StyleSheet, Text, View , TextInput, Button} from 'react-native';
 
 export default function App() {
   return (
-    <View style = {{padding: 50}}>
-        <View style = {{
-            flexDirection: 'row', 
-            justifyContent: 'space-between',
-            alignItems: 'center',
-        }}>
+    <View style = {styles.screen}>
+        <View style = {styles.topContainer}>
             <TextInput
-                placeholder = "Course Goal" 
-                style = {{borderColor: 'black', 
-                    width: '50%',
-                    borderWidth: 1, 
-                    padding: 10,
-                }}
+                placeholder = "Course Goal"
+                style = {styles.input} 
             />
             <Button 
                 title = "button here"
             />
         </View>
-
+        <View />
 
 
     </View>
@@ -30,7 +22,20 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-
+    screen: {
+        padding: 50,
+    },
+    topContainer: {
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    input: {
+        borderColor: 'black', 
+            width: '50%',
+                    borderWidth: 1, 
+                    padding: 10,
+    }
 
 
 });
@@ -46,6 +51,7 @@ const styles = StyleSheet.create({
         //         // aligns children along main-axis of parent
         //         justifyContent: 'center', // flex-start/end, center, space-between/end/evenly
         //         // alignItems >> aligns children along Cross-Axis of container
+        //         // for flexDirection: 'column', the Cross-Axis is the horizontal axis 
         //         alignItems: 'center', // flex-start/end, center, stretch
         //         // alignContent: 'center',
         //         borderWidth: 3,
