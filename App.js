@@ -25,6 +25,7 @@ export default function App() {
 
 		// better way, previous state guaranteed
 		setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+		setEnteredGoal('')
 	}
 
 
@@ -45,7 +46,9 @@ export default function App() {
 			<View>
 				{courseGoals.map((goal, index) => {
 					return (
-						<Text key = {index}> {goal} </Text>
+						<View key = {index} style = {styles.listItem}>
+							<Text> {goal} </Text>
+						</View>
 					)
 				})}
 			</View>
@@ -69,8 +72,17 @@ const styles = StyleSheet.create({
 			width: '50%',
 					borderWidth: 1, 
 					padding: 10,
-	}
+	},
+	listItem: {
+		padding: 10,
+		backgroundColor: 'deeppink',
+		borderWidth: 2,
+		borderRadius: 5,
+		borderColor: 'dodgerblue',
+		margin: 2,
 
+	
+	}
 
 });
 
