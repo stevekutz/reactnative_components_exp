@@ -19,7 +19,7 @@
 		expo init reactnative_components_exp
 		~~~
 
-3) Launch project into the browser 
+3) Launch project into the browser
 	- use `yarn start` or `npm start` from the terminal
 	- this will launch in the browser on port `http://localhost:19002/`
 	- use `CTRL + C` to quit
@@ -33,16 +33,16 @@
 	- install Xcode
 	- make sure `Command Line Tools` is installed under `Preferences/Locations`
 
-	- Launch the iPhone sumulator by either:
+	- Launch the iPhone iumulator by either:
 		- select `Run on iOS simulator` from the `Expo client` browser window on port `http://localhost:19002/`
     	- pressing `i` from the terminal window after starting project
 
-6)  Launch the project on the Android simulator 
-	- install Android Studio 
-    - under Configure-SDK Manager, select several Androis SDK Platform package
+6)  Launch the project on the Android simulator
+	- install Android Studio
+    - under Configure-SDK Manager, select several Android SDK Platform package
     - under Configure-AVD Manager, select the `play` button on one of the installed `Virtual Devices`
 
-  	- Launch the iPhone sumulator by either:
+  	- Launch the iPhone simulator by either:
         - select `Run on Android simulator` from the `Expo client` browser window on port `http://localhost:19002/`
         - pressing `a` from the terminal window after starting project
 
