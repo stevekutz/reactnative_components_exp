@@ -145,4 +145,48 @@
     });
     ~~~
 
+2) Implement a `FlatList` to render array items
 
+    ~~~ js
+    import { StyleSheet, Text, View , TextInput, Button, ScrollView, FlatList} from 'react-native';
+    ~~~
+
+    ~~~ js
+    return (
+    <View style = {styles.screen}>
+    <View style = {styles.topContainer}>
+        <TextInput
+            placeholder = "Course Goal"
+            style = {styles.input} 
+            onChangeText = {goalInputHandler}
+            value = {enteredGoal}
+        />
+        <Button 
+            title = "button here"
+            onPress = {addGoalHandler}
+        />
+    </View>
+    <FlatList
+                data = {courseGoals}
+                renderItem = {itemData =>  {
+                    return (
+                    <View style = {styles.listItem}>
+                        <Text> {itemData.item.value} </Text>
+                    </View>
+                    )
+                }}
+
+            />
+    </View>
+    );
+
+    ~~~
+
+    ~~~ js
+   // better way, previous state guaranteed
+   setCourseGoals(currentGoals => [
+         ...currentGoals, 
+         { key: Math.random().toString(), value:  enteredGoal }
+         ]);
+   setEnteredGoal('')
+    ~~~
