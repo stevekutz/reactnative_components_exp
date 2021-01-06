@@ -51,27 +51,96 @@
 
 1) Setup basic layout using `View` component
 
-    - every `View` uses `Flexbox` by default
+    - every `View` uses the `Flexbox` by default
+    - the `Stylesheet` is a `Core Component` used to provide styling simular to CSS. Some `Core Components`, such as `View` have more props available for styling than others such as `Text`
+    - `onPress` handler creates a `PressEvent` object as its first argument
+    - `onChangeText` is a `callback` that passes  string of changed text back to the handler `goalInputHandler`
+    - 
 
     ~~~ js
-    import React from 'react';
-    import { StyleSheet, Text, View } from 'react-native';
+    import React, {useState} from 'react';
+    import { StyleSheet, Text, View , TextInput, Button} from 'react-native';
+
 
     export default function App() {
-    return (
-        <View>
-            <View>
-            
-            </View>
-            <View>
-            
-            </View>
 
-        </View>
-    );
+        const [enteredGoal, setEnteredGoal] = useState('');
+        const [courseGoals, setCourseGoals] = useState([]);
+
+        // // another way
+        // function goalInputHandler (enteredText) {
+        // 	console.log(enteredText)
+        // 	setEnteredGoal(enteredText)
+        // }
+
+        const goalInputHandler = (enteredText) => {
+            // console.log(enteredText)
+            setEnteredGoal(enteredText);
+        }
+
+        const addGoalHandler = () => {
+            console.log(enteredGoal)
+            // // simple way, but previous State not always guaranteed
+            // setCourseGoals([...courseGoals, enteredGoal]);
+
+            // better way, previous state guaranteed
+            setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+            setEnteredGoal('')
+        }
+
+
+        return (
+            <View style = {styles.screen}>
+                <View style = {styles.topContainer}>
+                    <TextInput
+                        placeholder = "Course Goal"
+                        style = {styles.input} 
+                        onChangeText = {goalInputHandler}
+                        value = {enteredGoal}
+                    />
+                    <Button 
+                        title = "button here"
+                        onPress = {addGoalHandler}
+                    />
+                </View>
+                <View>
+                    {courseGoals.map((goal, index) => {
+                        return (
+                            <View key = {index} style = {styles.listItem}>
+                                <Text> {goal} </Text>
+                            </View>
+                        )
+                    })}
+                </View>
+
+
+            </View>
+        );
     }
 
     const styles = StyleSheet.create({
+        screen: {
+            padding: 50,
+        },
+        topContainer: {
+            flexDirection: 'row', 
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        },
+        input: {
+            borderColor: 'black', 
+                width: '50%',
+                        borderWidth: 1, 
+                        padding: 10,
+        },
+        listItem: {
+            padding: 10,
+            backgroundColor: 'deeppink',
+            borderWidth: 2,
+            borderRadius: 5,
+            borderColor: 'dodgerblue',
+            margin: 2,	
+        }
 
     });
     ~~~
