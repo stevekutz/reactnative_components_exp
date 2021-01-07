@@ -1,61 +1,38 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View , TextInput, Button, ScrollView, FlatList} from 'react-native';
-
+import GoalItem from './components/GoalItem';
+import GoalInput from './components/GoalInput';
 
 export default function App() {
 
-	const [enteredGoal, setEnteredGoal] = useState('');
 	const [courseGoals, setCourseGoals] = useState([]);
 
-	// // another way
-	// function goalInputHandler (enteredText) {
-	// 	console.log(enteredText)
-	// 	setEnteredGoal(enteredText)
-	// }
-
-	const goalInputHandler = (enteredText) => {
-		// console.log(enteredText)
-		setEnteredGoal(enteredText);
-	}
-
-	const addGoalHandler = () => {
-		console.log(enteredGoal)
-		// // simple way, but previous State not always guaranteed
-		// setCourseGoals([...courseGoals, enteredGoal]);
+	const addGoalHandler = (goal) => {
+		console.log(goal)
 
 		// better way, previous state guaranteed
 		setCourseGoals(currentGoals => [
             ...currentGoals, 
-            { key: Math.random().toString(), value:  enteredGoal }
+            { id: Math.random().toString(), value:  goal }
             ]);
-		setEnteredGoal('')
+		// setEnteredGoal('')
 	}
-
 
 	return (
 		<View style = {styles.screen}>
-			<View style = {styles.topContainer}>
-				<TextInput
-					placeholder = "Course Goal"
-					style = {styles.input} 
-					onChangeText = {goalInputHandler}
-					value = {enteredGoal}
-				/>
-				<Button 
-					title = "button here"
-					onPress = {addGoalHandler}
-				/>
-			</View>
+            <GoalInput 
+                // enteredGoal = {enteredGoal}
+                // goalInputHandler = {goalInputHandler}
+                addGoalHandler = {addGoalHandler}                
+            />
 			<FlatList
+                keyExtractor = {(item, index) => item.id}
                 data = {courseGoals}
                 renderItem = {itemData =>  {
                     return (
-                    <View style = {styles.listItem}>
-                        <Text> {itemData.item.value} </Text>
-                    </View>
+                        <GoalItem itemValue = {itemData.item.value} />
                     )
-                }}
-		
+                }}		
             />
 		</View>
 	);
@@ -65,26 +42,6 @@ const styles = StyleSheet.create({
 	screen: {
 		padding: 50,
 	},
-	topContainer: {
-		flexDirection: 'row', 
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	input: {
-		borderColor: 'black', 
-			width: '50%',
-					borderWidth: 1, 
-					padding: 10,
-	},
-	listItem: {
-		padding: 10,
-		backgroundColor: 'deeppink',
-		borderWidth: 2,
-		borderRadius: 5,
-		borderColor: 'dodgerblue',
-		margin: 2,	
-	}
-
 });
 
 
