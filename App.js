@@ -6,6 +6,7 @@ import GoalInput from './components/GoalInput';
 export default function App() {
 
 	const [courseGoals, setCourseGoals] = useState([]);
+    const [modalActive, setModalActive] = useState(false)
 
 	const addGoalHandler = (goal) => {
 		console.log(goal)
@@ -16,6 +17,7 @@ export default function App() {
             { id: Math.random().toString(), value:  goal }
             ]);
 		// setEnteredGoal('')
+        setModalActive(false)
 	}
 
     const removeGoalHandler = goalId => {
@@ -27,9 +29,11 @@ export default function App() {
 
 	return (
 		<View style = {styles.screen} >
+            <Button title = 'Add New Goal' onPress = {() => setModalActive(true)}/>
             <GoalInput 
                 // enteredGoal = {enteredGoal}
                 // goalInputHandler = {goalInputHandler}
+                visible = {modalActive}
                 addGoalHandler = {addGoalHandler}                
             />
 			<FlatList
