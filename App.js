@@ -26,6 +26,11 @@ export default function App() {
         });
     }
 
+    const cancelAddGoal = () => {
+        setModalActive(false)
+    
+    }
+
 
 	return (
 		<View style = {styles.screen} >
@@ -34,7 +39,8 @@ export default function App() {
                 // enteredGoal = {enteredGoal}
                 // goalInputHandler = {goalInputHandler}
                 visible = {modalActive}
-                addGoalHandler = {addGoalHandler}                
+                addGoalHandler = {addGoalHandler}   
+                cancelAddGoal = {cancelAddGoal}             
             />
 			<FlatList
                 keyExtractor = {(item, index) => item.id}
