@@ -340,3 +340,70 @@
         },
     });
     ~~~
+
+4) Add delete functionality
+
+    - `Pressable` is used iunstead of `onClick`
+    - `removeGoalHandler` from `App` is passed as a prop into `GoalItem` which also receives an id and value prop
+    - `keyExtractor` locates a unique key for given item at a specific index
+    - `data` identifies a `plain array`
+    - `renderItem` extracts an item from the array designated in `data` and renders it as a list item
+
+        ~~~ js
+        // App.js
+        ...
+        const removeGoalHandler = goalId => {
+        setCourseGoals(currentGoals => {
+            return currentGoals.filter((goal) => goal.id !== goalId);
+        });
+        }
+
+
+        return (
+        <View style = {styles.screen} >
+            <GoalInput 
+                // enteredGoal = {enteredGoal}
+                // goalInputHandler = {goalInputHandler}
+                addGoalHandler = {addGoalHandler}                
+            />
+            <FlatList
+                keyExtractor = {(item, index) => item.id}
+                data = {courseGoals}
+                renderItem = {itemData =>  {
+                    return (
+                        <GoalItem 
+                            id = {itemData.item.id}
+                            onDelete = {removeGoalHandler}
+                            itemValue = {itemData.item.value} 
+
+                        />
+                    )
+                }}		
+            />
+        </View>
+        );
+        }
+        ...
+        ~~~
+
+        - `TouchableOpacity` is used to indicate actively pressed item
+        - `onPress` can call the `onDelete` handler using `bind` or an `arrow function`
+
+        ~~~ js
+        ... 
+        const GoalItem = props => {
+
+            return (
+                // alternative way using bind
+                // <TouchableOpacity activeOpacity = {0.8} onPress = {props.onDelete.bind(this, props.id)} >
+                <TouchableOpacity activeOpacity = {0.8} onPress = {() => props.onDelete(props.id)} >
+                    <View style = {styles.listItem}>
+                        <Text> {props.itemValue} </Text>
+                    </View>    
+                
+                </TouchableOpacity>
+
+                )
+
+}
+        ~~~

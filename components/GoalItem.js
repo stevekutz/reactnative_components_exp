@@ -1,15 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Pressable, TouchableHighlight} from 'react-native';
 
 
 const GoalItem = props => {
 
     return (
-        <TouchableOpacity activeOpacity = {0.8} onPress = {props.onDelete.bind(this, props.id)} >
+        // alternative way using bind
+        // <TouchableOpacity activeOpacity = {0.8} onPress = {props.onDelete.bind(this, props.id)} >
+        <TouchableOpacity activeOpacity = {0.8} onPress = {() => props.onDelete(props.id)} >
             <View style = {styles.listItem}>
                 <Text> {props.itemValue} </Text>
             </View>    
+        
         </TouchableOpacity>
+
         )
 
 }
@@ -26,3 +30,6 @@ const styles = StyleSheet.create ({
         margin: 2,	
 	}
 })
+
+
+// <TouchableOpacity activeOpacity = {0.8} onPress = {props.onDelete.bind(this, props.id)} >
