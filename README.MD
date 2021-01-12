@@ -407,3 +407,84 @@
 
 }
         ~~~
+
+5) Add Cancel Button and styling        
+
+    - `goalInputFieldHandler` is used to manage adding a goal and resetting `TextInput` to blank field
+    - styling `Button` components only occurs when they are wrapped in a `View` component
+
+
+    ~~~ js
+    const GoalInput = props => {
+
+        const [enteredGoal, setEnteredGoal] = useState('');
+
+        const goalInputHandler = (enteredText) => {
+            // console.log(enteredText)
+            setEnteredGoal(enteredText);
+        }
+
+        const goalInputFieldHandler = () => {
+            props.addGoalHandler(enteredGoal)
+            setEnteredGoal('')
+        }
+
+        return (
+            <Modal visible = {props.visible} animationType = "slide">
+                <View style = {styles.topContainer}>
+                    <TextInput
+                        placeholder = "Course Goal"
+                        style = {styles.input} 
+                        onChangeText = {goalInputHandler}
+                        value = {enteredGoal}
+                    />
+
+                    <View style = {styles.controlButtonsContainer}>
+                        <View style = {styles.buttonStyle}>
+                            <Button
+                                // style = {styles.buttonStyle}
+                                title = "Cancel"
+                                color = "red"
+                                onPress = {props.cancelAddGoal}                    
+                            />                                        
+                        </View>
+                        <View style = {styles.buttonStyle}>
+                            <Button 
+                                title = "Add"
+                                onPress = {goalInputFieldHandler}
+                                // onPress = {() => props.addGoalHandler(enteredGoal)}
+                            // onPress = {props.addGoalHandler.bind(this, enteredGoal)}
+                            />                    
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+        )
+
+    }
+    ~~~
+
+    - `cancelAddGoal` is passed into `GoalInput` from `App`
+
+    ~~~ js
+    // App.js
+    ...
+    const cancelAddGoal = () => {
+    setModalActive(false)
+
+    }
+
+
+    return (
+    <View style = {styles.screen} >
+        <Button title = 'Add New Goal' onPress = {() => setModalActive(true)}/>
+        <GoalInput 
+            // enteredGoal = {enteredGoal}
+            // goalInputHandler = {goalInputHandler}
+            visible = {modalActive}
+            addGoalHandler = {addGoalHandler}   
+            cancelAddGoal = {cancelAddGoal}             
+        />
+    <FlatList
+    ...
+    ~~~

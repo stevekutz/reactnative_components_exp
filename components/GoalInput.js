@@ -26,18 +26,23 @@ const GoalInput = props => {
                     value = {enteredGoal}
                 />
 
-                <View style = {styles.controlButtons}>
-                    <Button
-                        title = "Cancel"
-                        color = "red"
-                        onPress = {props.cancelAddGoal}                    
-                    />
-                    <Button 
-                        title = "Add"
-                        onPress = {goalInputFieldHandler}
-                        // onPress = {() => props.addGoalHandler(enteredGoal)}
-                    // onPress = {props.addGoalHandler.bind(this, enteredGoal)}
-                    />
+                <View style = {styles.controlButtonsContainer}>
+                    <View style = {styles.buttonStyle}>
+                        <Button
+                            // style = {styles.buttonStyle}
+                            title = "Cancel"
+                            color = "red"
+                            onPress = {props.cancelAddGoal}                    
+                        />                                        
+                    </View>
+                    <View style = {styles.buttonStyle}>
+                        <Button 
+                            title = "Add"
+                            onPress = {goalInputFieldHandler}
+                            // onPress = {() => props.addGoalHandler(enteredGoal)}
+                        // onPress = {props.addGoalHandler.bind(this, enteredGoal)}
+                        />                    
+                    </View>
                 </View>
             </View>
         </Modal>
@@ -62,8 +67,20 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
 	},
-    controlButtons: {
+    controlButtonsContainer: {
+        // backgroundColor: 'yellow',
+        // borderColor: 'yellow',
+        // borderWidth: 4,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        width: '50%',
+    },
+    buttonStyle: {
+        //backgroundColor: 'gray',  
+        // borderColor: 'black',
+        width: 90,
+        margin: 2,
+        borderWidth: 1,
+        borderRadius: 5,
     }
 })
